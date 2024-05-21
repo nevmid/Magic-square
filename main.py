@@ -193,6 +193,38 @@ class Magic_Square(QMainWindow):
         self.gridLayout_10.addWidget(self.frame_4, 2, 0, 1, 1)
         MainWindow.setWindowTitle("Магический квадрат")
         self.check.setText("Проверить")
+        self.check.clicked.connect(self.create_matrix)
+        self.menu_btn_sqr.clicked.connect(self.__init__)
+        self.esc_btn.clicked.connect(self.difficulty)
+
+    def create_matrix(self):
+        try:
+            items = [lineEdit.text() for lineEdit in self.frame_2.findChildren(QtWidgets.QLineEdit)]
+            matr = []
+            flag = False
+            j = 0
+            for i in range(self.size):
+                list = []
+                while len(list) != self.size:
+                    list.append(int(items[j]))
+                    j += 1
+                matr.append(list)
+            if self.mode == 'Magic':
+                for i in range(self.size ** 2):
+                    if items.count(items[i]) > 1:
+                        flag = True
+                        break
+            self.result(matr, flag)
+        except:
+            self.error()
+
+    def error(self):
+        error_msg = QMessageBox()
+        error_msg.setWindowTitle('Ошибка')
+        error_msg.setStyleSheet('font: 14pt Arial')
+        error_msg.setIcon(QMessageBox.Warning)
+        error_msg.setText('Нужно заполнить все ячейки!')
+        error_msg.exec_()
 
 
 if __name__ == "__main__":
