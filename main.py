@@ -226,26 +226,86 @@ class Magic_Square(QMainWindow):
         error_msg.setText('Нужно заполнить все ячейки!')
         error_msg.exec_()
 
+    def SameNum_error(self):
+        error_msg = QMessageBox()
+        error_msg.setWindowTitle('Ошибка')
+        error_msg.setStyleSheet('font: 14pt Arial')
+        error_msg.setIcon(QMessageBox.Warning)
+        error_msg.setText('Числа во всех ячейках должны отличаться')
+        error_msg.exec_()
+
+    def check_matrix(self, matrix):
+        first = sum(matrix[0])
+        first_diag = 0
+        second_diag = 0
+        for k in range(1, self.size):
+            if sum(matrix[0]) != first:
+                return False
+        for k in range(self.size):
+            if sum([row[k] for row in matrix]) != first:
+                return False
+        if self.mode == 'Magic':
+            for i in range(self.size):
+                first_diag += matrix[i][i]
+            if first_diag != first:
+                return False
+            for i in range(self.size):
+                second_diag += matrix[i][self.size - i - 1]
+            if second_diag != first:
+                return False
+        return True
+
+    def result(self, matrix, flag):
+        if flag:
+            self.SameNum_error()
+        else:
+            if self.check_matrix(matrix):
+                self.win()
+            else:
+                self.lose()
+
+    def win(self):
+        MainWindow.setStyleSheet('''QLineEdit {background-color: lightgreen;
+                                   font:16pt Arial;
+                                   border: 5px solid grey;
+                                   }
+                                        ''')
+        lineEdits = MainWindow.findChildren(QtWidgets.QLineEdit)
+        for lineedit in lineEdits:
+            lineedit.setReadOnly(True)
+        self.lTry.setText('Вы выиграли!')
+        self.lTry.setHidden(False)
+
+    def lose(self):
+        MainWindow.setStyleSheet('''QLineEdit {background-color: red;
+                                   font:16pt Arial;
+                                   border: 5px solid grey;
+                                   }
+                                      ''')
+        lineEdits = MainWindow.findChildren(QtWidgets.QLineEdit)
+        for lineedit in lineEdits:
+            lineedit.setReadOnly(True)
+        self.lTry.setText('Вы проиграли!')
+        self.lTry.setHidden(False)
+        self.try_again.setHidden(False)
+        self.try_again.clicked.connect(lambda: self.Try_again(lineEdits))
+
+    def Try_again(self, edits):
+        MainWindow.setStyleSheet('''QLineEdit {background-color: white;
+                                   font:16pt Arial;
+                                   border: 5px solid grey;
+                                   }
+                                      ''')
+        for line in edits:
+            if line.isReadOnly() and (line.isEnabled()):
+                line.setText('')
+                line.setReadOnly(False)
+        self.lTry.setHidden(True)
+        self.try_again.setHidden(True)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    app.setStyleSheet('''
-                         QPushButton{
-                         font: 14pt Arial;
-                         background-color: transparent;
-                         border: none;
-                         }
-
-                         QPushButton:hover {
-                         background-color: transparent;
-                         border: none;
-                         }
-
-                         QPushButton:pressed{
-                         background-color: transparent;
-                         border: none;
-                         }
-                                                 ''')
     MainWindow = QMainWindow()
     MainWindow.resize(1080, 720)
     ui = Magic_Square()
