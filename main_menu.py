@@ -1,5 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QWidget, QPushButton, QApplication
+from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import QWidget, QPushButton, QApplication, QGraphicsDropShadowEffect
 import modes
 
 
@@ -45,14 +46,51 @@ def setupUi(MainWindow, self):
     gridLayout_label = QtWidgets.QGridLayout(frame_2)
     label = QtWidgets.QLabel(frame_2)
     label.setStyleSheet("color: black;font: 50pt Century Gothic;")
+    shadows = QGraphicsDropShadowEffect()
+    shadows.setBlurRadius(5)
+    shadows.setColor(QColor(0, 0, 0, 127))
+    shadows.setOffset(4, 4)
+    label.setGraphicsEffect(shadows)
     gridLayout_label.addWidget(label, 0, 0, 1, 1, QtCore.Qt.AlignHCenter)
     gridLayout.addWidget(frame_2, 0, 0, 1, 1)
     MainWindow.setCentralWidget(centralwidget)
+    MainWindow.setStyleSheet('''QPushButton{
+                             font: 14pt Century Gothic;
+                             background-color: transparent;
+                             border: none;
+                             }
+
+                             QPushButton:hover {
+                             background-color: transparent;
+                             border: none;
+                             font: 16pt;
+                             }
+
+                             QPushButton:pressed{
+                             background-color: transparent;
+                             border: none;
+                             }
+                                                     ''')
     MainWindow.setWindowTitle("Магический квадрат")
     play_button.setText("Играть")
     rules_button.setText("Как играть")
     exit_button.setText("Выход")
     label.setText("Магический квадрат")
+    shadow = QGraphicsDropShadowEffect()
+    shadow.setBlurRadius(2)
+    shadow.setColor(QColor(0, 0, 0, 127))
+    shadow.setOffset(1, 1)
     exit_button.clicked.connect(lambda: QApplication.quit())
+    exit_button.setGraphicsEffect(shadow)
+    shadow = QGraphicsDropShadowEffect()
+    shadow.setBlurRadius(2)
+    shadow.setColor(QColor(0, 0, 0, 127))
+    shadow.setOffset(1, 1)
     rules_button.clicked.connect(self.show_rules)
+    rules_button.setGraphicsEffect(shadow)
+    shadow = QGraphicsDropShadowEffect()
+    shadow.setBlurRadius(2)
+    shadow.setColor(QColor(0, 0, 0, 127))
+    shadow.setOffset(1, 1)
     play_button.clicked.connect(lambda: modes.Mode(self, MainWindow))
+    play_button.setGraphicsEffect(shadow)
