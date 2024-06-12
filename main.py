@@ -1,9 +1,10 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox, QWidget, QPushButton
 from PyQt5.Qt import *
+from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import QObject
 import sys, random
-import main_menu, modes
+import main_menu, modes, Difficult
 
 class Magic_Square(QMainWindow):
     def __init__(self):
@@ -28,53 +29,6 @@ class Magic_Square(QMainWindow):
         msg.exec_()
 
 
-    def difficulty(self):
-        MainWindow.setWindowTitle("Магический квадрат")
-        centralwidget = QtWidgets.QWidget(MainWindow)
-        gridLayout_diff_main = QtWidgets.QGridLayout(centralwidget)
-        frame_2 = QtWidgets.QFrame(centralwidget)
-        frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
-        gridLayout_diff_frame = QtWidgets.QGridLayout(frame_2)
-        gridLayout_diff_btn = QtWidgets.QGridLayout()
-        buttons = []
-        if self.mode == 'Semi-magic':
-            buttons = [['3x3 0-20', '3x3 0-50', '3x3 0-100'],
-                       ['4x4 0-20', '4x4 0-50', '4x4 0-100'],
-                       ['5x5 0-20', '5x5 0-50', '5x5 0-100']]
-        elif self.mode == 'Magic':
-            buttons = [['3x3', '4x4', '5x5', '6x6'],
-                       ['7x7', '8x8', '9x9', '10x10']]
-        for i in range(self.x):
-            for j in range(self.y):
-                btn = QPushButton(buttons[i][j])
-                btn.setMaximumSize(QtCore.QSize(200, 50))
-                gridLayout_diff_btn.addWidget(btn, i, j, 1, 1)
-                btn.clicked.connect(self.size_and_range)
-        gridLayout_diff_frame.addLayout(gridLayout_diff_btn, 0, 0, 1, 1)
-        gridLayout_diff_main.addWidget(frame_2, 1, 0, 1, 1)
-        frame = QtWidgets.QFrame(centralwidget)
-        frame.setMaximumSize(QtCore.QSize(200, 65))
-        frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        frame.setFrameShadow(QtWidgets.QFrame.Raised)
-        gridLayout_menu = QtWidgets.QGridLayout(frame)
-        menu_btn = QPushButton(frame)
-        menu_btn.setMinimumSize(QtCore.QSize(80, 40))
-        gridLayout_menu.addWidget(menu_btn, 0, 0, 1, 1)
-        esc_b = QPushButton(frame)
-        esc_b.setMaximumSize(QtCore.QSize(80, 40))
-        gridLayout_menu.addWidget(esc_b, 0, 1, 1, 1)
-        gridLayout_diff_main.addWidget(frame, 0, 0, 1, 1, QtCore.Qt.AlignLeft)
-        MainWindow.setCentralWidget(centralwidget)
-        menu_btn.setIcon(QIcon('C:/Users/Admin/PycharmProjects/pythonProject1/menu.ico'))
-        menu_btn.setIconSize(QSize(50, 30))
-        esc_b.setIcon(QIcon('C:/Users/Admin/PycharmProjects/pythonProject1/arrow.ico'))
-        esc_b.setIconSize(QSize(50, 30))
-        esc_b.setMinimumSize(QtCore.QSize(80, 40))
-        esc_b.clicked.connect(lambda: modes.Mode(self, MainWindow))
-        menu_btn.clicked.connect(self.__init__)
-
-
     def size_and_range(self):
         sender = self.sender()
         if self.mode == 'Semi-magic':
@@ -89,10 +43,23 @@ class Magic_Square(QMainWindow):
     def create_square(self):
         MainWindow.setStyleSheet('''
                                 QLineEdit {
-                                font: 16pt Arial;
+                                font: 16pt Century Gothic;
                                 border: 5px solid grey;
                                 }
-                                ''')
+                                QPushButton{
+                                 font: 20pt Century Gothic;
+                                 background-color: transparent;
+                                 border: none;
+                                 }
+                                 QMainWindow { 
+                                 background-image: url(newf.png);
+                                 background-repeat: no-repeat;
+                                 background-position:center;
+                                 background-size: cover;
+                                 }
+
+
+                                                         ''')
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.gridLayout_10 = QtWidgets.QGridLayout(self.centralwidget)
         self.frame_2 = QtWidgets.QFrame(self.centralwidget)
@@ -131,6 +98,11 @@ class Magic_Square(QMainWindow):
         for i in range(self.size):
             for j in range(self.size):
                 self.line_edit = QLineEdit()
+                shadow = QGraphicsDropShadowEffect()
+                shadow.setBlurRadius(2)
+                shadow.setColor(QColor(0, 0, 0, 127))
+                shadow.setOffset(3, 3)
+                self.line_edit.setGraphicsEffect(shadow)
                 self.line_edit.setMaximumSize(QtCore.QSize(100, 100))
                 self.line_edit.setAlignment(Qt.AlignCenter)
                 self.line_edit.setValidator(validator)
@@ -150,13 +122,25 @@ class Magic_Square(QMainWindow):
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.gridLayout_5 = QtWidgets.QGridLayout(self.frame)
         self.esc_btn = QPushButton(self.frame)
+        shadow = QGraphicsDropShadowEffect()
+        shadow.setBlurRadius(2)
+        shadow.setColor(QColor(0, 0, 0, 127))
+        shadow.setOffset(2, 2)
+        self.esc_btn.setGraphicsEffect(shadow)
         self.esc_btn.setMaximumSize(QtCore.QSize(80, 40))
         self.esc_btn.setIcon(QIcon('C:/Users/Admin/PycharmProjects/pythonProject1/arrow.ico'))
         self.esc_btn.setIconSize(QSize(50, 30))
+        self.esc_btn.setCursor(Qt.PointingHandCursor)
         self.gridLayout_5.addWidget(self.esc_btn, 0, 1, 1, 1)
         self.menu_btn_sqr = QPushButton(self.frame)
+        shadow = QGraphicsDropShadowEffect()
+        shadow.setBlurRadius(2)
+        shadow.setColor(QColor(0, 0, 0, 127))
+        shadow.setOffset(2, 2)
+        self.menu_btn_sqr.setGraphicsEffect(shadow)
         self.menu_btn_sqr.setIcon(QIcon('C:/Users/Admin/PycharmProjects/pythonProject1/menu.ico'))
         self.menu_btn_sqr.setIconSize(QSize(50, 30))
+        self.menu_btn_sqr.setCursor(Qt.PointingHandCursor)
         self.gridLayout_5.addWidget(self.menu_btn_sqr, 0, 0, 1, 1)
         self.gridLayout_10.addWidget(self.frame, 0, 0, 1, 1, Qt.AlignLeft)
         self.frame_3 = QtWidgets.QFrame(self.centralwidget)
@@ -165,14 +149,20 @@ class Magic_Square(QMainWindow):
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
         self.gridLayout = QtWidgets.QGridLayout(self.frame_3)
         self.check = QPushButton(self.frame_3)
-        self.check.setMinimumSize(QtCore.QSize(30, 30))
-        self.check.setMaximumSize(QtCore.QSize(200, 60))
+        self.check.resize(QtCore.QSize(300, 60))
+        self.check.setCursor(Qt.PointingHandCursor)
         self.gridLayout.addWidget(self.check, 0, 0, 1, 1)
         if self.mode == 'Semi-magic':
+            shadow = QGraphicsDropShadowEffect()
+            shadow.setBlurRadius(2)
+            shadow.setColor(QColor(0, 0, 0, 127))
+            shadow.setOffset(2, 2)
             self.upd_btn = QPushButton(self.frame_3)
-            self.upd_btn.setMinimumSize(QtCore.QSize(80, 40))
+            self.upd_btn.setGraphicsEffect(shadow)
+            self.upd_btn.resize(QtCore.QSize(80, 60))
             self.upd_btn.setIcon(QIcon('C:/Users/Admin/PycharmProjects/pythonProject1/upd.ico'))
             self.upd_btn.setIconSize(QSize(50, 30))
+            self.upd_btn.setCursor(Qt.PointingHandCursor)
             self.gridLayout.addWidget(self.upd_btn, 0, 1, 1, 1)
             self.upd_btn.clicked.connect(self.create_square)
         self.gridLayout_10.addWidget(self.frame_3, 3, 0, 1, 1, Qt.AlignRight)
@@ -181,21 +171,28 @@ class Magic_Square(QMainWindow):
         self.frame_4.setMaximumSize(QtCore.QSize(16777215, 100))
         self.gridlay = QGridLayout(self.frame_4)
         self.lTry = QLabel(self.frame_4)
-        self.lTry.setMaximumSize(QSize(200,50))
-        self.lTry.setStyleSheet('font: 14pt Arial')
+        self.lTry.resize(QSize(500,40))
+        self.lTry.setStyleSheet('font: 20pt Century Gothic')
         self.lTry.setHidden(True)
         self.gridlay.addWidget(self.lTry, 0, 0, 1, 1, Qt.AlignHCenter)
         self.try_again = QPushButton(self.frame_4)
-        self.try_again.setMaximumSize(QSize(300,50))
+        self.try_again.resize(QSize(500,40))
         self.try_again.setText('Попробовать снова')
         self.try_again.setHidden(True)
+        self.try_again.setCursor(Qt.PointingHandCursor)
+        self.try_again.setStyleSheet('font: 16pt Century Gothic; border: none')
         self.gridlay.addWidget(self.try_again, 1, 0, 1, 1, Qt.AlignHCenter)
         self.gridLayout_10.addWidget(self.frame_4, 2, 0, 1, 1)
         MainWindow.setWindowTitle("Магический квадрат")
+        shadow = QGraphicsDropShadowEffect()
+        shadow.setBlurRadius(2)
+        shadow.setColor(QColor(0, 0, 0, 127))
+        shadow.setOffset(1, 2)
         self.check.setText("Проверить")
+        self.check.setGraphicsEffect(shadow)
         self.check.clicked.connect(self.create_matrix)
         self.menu_btn_sqr.clicked.connect(self.__init__)
-        self.esc_btn.clicked.connect(self.difficulty)
+        self.esc_btn.clicked.connect(lambda: Difficult.difficulty(self, MainWindow))
 
     def create_matrix(self):
         try:
@@ -239,7 +236,7 @@ class Magic_Square(QMainWindow):
         first_diag = 0
         second_diag = 0
         for k in range(1, self.size):
-            if sum(matrix[0]) != first:
+            if sum(matrix[k]) != first:
                 return False
         for k in range(self.size):
             if sum([row[k] for row in matrix]) != first:
@@ -265,38 +262,35 @@ class Magic_Square(QMainWindow):
                 self.lose()
 
     def win(self):
-        MainWindow.setStyleSheet('''QLineEdit {background-color: lightgreen;
-                                   font:16pt Arial;
-                                   border: 5px solid grey;
-                                   }
-                                        ''')
         lineEdits = MainWindow.findChildren(QtWidgets.QLineEdit)
         for lineedit in lineEdits:
             lineedit.setReadOnly(True)
+            lineedit.setStyleSheet('''background-color: lightgreen;
+                                       font:16pt Century Gothic;
+                                       border: 5px solid grey;
+                                            ''')
         self.lTry.setText('Вы выиграли!')
         self.lTry.setHidden(False)
 
     def lose(self):
-        MainWindow.setStyleSheet('''QLineEdit {background-color: red;
-                                   font:16pt Arial;
-                                   border: 5px solid grey;
-                                   }
-                                      ''')
         lineEdits = MainWindow.findChildren(QtWidgets.QLineEdit)
         for lineedit in lineEdits:
             lineedit.setReadOnly(True)
+            lineedit.setStyleSheet(''' background-color: red;
+                                       font:16pt Century Gothic;
+                                       border: 5px solid grey;
+                                          ''')
         self.lTry.setText('Вы проиграли!')
         self.lTry.setHidden(False)
         self.try_again.setHidden(False)
         self.try_again.clicked.connect(lambda: self.Try_again(lineEdits))
 
     def Try_again(self, edits):
-        MainWindow.setStyleSheet('''QLineEdit {background-color: white;
-                                   font:16pt Arial;
-                                   border: 5px solid grey;
-                                   }
-                                      ''')
         for line in edits:
+            line.setStyleSheet('''background-color: white;
+                                       font:16pt Century Gothic;
+                                       border: 5px solid grey;
+                                          ''')
             if line.isReadOnly() and (line.isEnabled()):
                 line.setText('')
                 line.setReadOnly(False)
@@ -307,7 +301,7 @@ class Magic_Square(QMainWindow):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     MainWindow = QMainWindow()
-    MainWindow.resize(1080, 720)
+    MainWindow.resize(1920, 1080)
     ui = Magic_Square()
-    MainWindow.show()
+    MainWindow.showMaximized()
     sys.exit(app.exec_())
