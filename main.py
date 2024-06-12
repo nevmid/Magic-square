@@ -20,12 +20,14 @@ class Magic_Square(QMainWindow):
         msg = QMessageBox()
         msg.setWindowTitle('Как играть')
         msg.setIcon(QMessageBox.Question)
-        msg.setStyleSheet('')
-        msg.setText('Магический квадрат - это n * n квадратная сетка, заполненная'
-                    ' различными целыми положительными числами в диапазоне 1, 2 , . . . , n *n'
-                    ' таким образом, что каждая ячейка содержит целое число, а сумма целых'
-                    ' чисел в каждой строке, столбце и диагонали равна.\nНеобходимо заполнить каждую ячейку так,'
-                    ' чтобы суммы в каждой строке, столбце и диагонали были равными.')
+        msg.setStyleSheet('font: 14pt Century Gothic')
+        msg.setText('Режим "Магический" '
+                    '\nНеобходимо заполнить ячейки квадрата различными числами так,'
+                     ' чтобы суммы элементов в каждой строке, каждом столбце и обеих диагоналях были равны.\n'
+                    '\nРежим "Полумагический"'
+                    '\nНужно заполнить ячейки квадрата числами так,'
+                     ' чтобы суммы элементов в каждой строке и каждом столбце были равны. При этом '
+                     'можно использовать повторяющиеся числа')
         msg.exec_()
 
 
@@ -218,7 +220,7 @@ class Magic_Square(QMainWindow):
     def error(self):
         error_msg = QMessageBox()
         error_msg.setWindowTitle('Ошибка')
-        error_msg.setStyleSheet('font: 14pt Arial')
+        error_msg.setStyleSheet('font: 14pt Century Gothic')
         error_msg.setIcon(QMessageBox.Warning)
         error_msg.setText('Нужно заполнить все ячейки!')
         error_msg.exec_()
@@ -226,9 +228,9 @@ class Magic_Square(QMainWindow):
     def SameNum_error(self):
         error_msg = QMessageBox()
         error_msg.setWindowTitle('Ошибка')
-        error_msg.setStyleSheet('font: 14pt Arial')
+        error_msg.setStyleSheet('font: 14pt Century Gothic')
         error_msg.setIcon(QMessageBox.Warning)
-        error_msg.setText('Числа во всех ячейках должны отличаться')
+        error_msg.setText('Числа во всех ячейках должны отличаться!')
         error_msg.exec_()
 
     def check_matrix(self, matrix):
