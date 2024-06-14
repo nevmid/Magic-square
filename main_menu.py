@@ -71,7 +71,7 @@ def setupUi(MainWindow, self):
                              border: none;
                              }
                              QMainWindow { 
-                             background-image: url(newf.png);
+                             background-image: url(images/newf.png);
                              background-repeat: no-repeat;
                              background-position:center;
                              background-size: cover;

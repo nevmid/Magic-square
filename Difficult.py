@@ -31,7 +31,7 @@ def difficulty(self, MainWindow):
                                     border: none;
                                     }
                                     QMainWindow { 
-                                    background-image: url(newf.png);
+                                    background-image: url(images/newf.png);
                                     background-repeat: no-repeat;
                                     background-position:center;
                                     background-size: cover;
@@ -75,7 +75,7 @@ def difficulty(self, MainWindow):
     shadow.setBlurRadius(2)
     shadow.setColor(QColor(0, 0, 0, 127))
     shadow.setOffset(2, 2)
-    menu_btn.setIcon(QIcon('menu.ico'))
+    menu_btn.setIcon(QIcon('images/menu.ico'))
     menu_btn.setIconSize(QSize(50, 30))
     menu_btn.setGraphicsEffect(shadow)
     menu_btn.setCursor(Qt.PointingHandCursor)
@@ -83,7 +83,7 @@ def difficulty(self, MainWindow):
     shadow.setBlurRadius(2)
     shadow.setColor(QColor(0, 0, 0, 127))
     shadow.setOffset(2, 2)
-    esc_b.setIcon(QIcon('arrow.ico'))
+    esc_b.setIcon(QIcon('images/arrow.ico'))
     esc_b.setIconSize(QSize(50, 30))
     esc_b.setGraphicsEffect(shadow)
     esc_b.setMinimumSize(QtCore.QSize(80, 40))

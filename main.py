@@ -19,7 +19,7 @@ class Magic_Square(QMainWindow):
     def show_rules(self):
         msg = QMessageBox()
         msg.setWindowTitle('Как играть')
-        msg.setWindowIcon(QIcon('ques.png'))
+        msg.setWindowIcon(QIcon('images/ques.png'))
         msg.setIcon(QMessageBox.Question)
         msg.setStyleSheet('font: 14pt Century Gothic')
         msg.setText('Режим "Магический" '
@@ -55,7 +55,7 @@ class Magic_Square(QMainWindow):
                                  border: none;
                                  }
                                  QMainWindow { 
-                                 background-image: url(newf.png);
+                                 background-image: url(images/newf.png);
                                  background-repeat: no-repeat;
                                  background-position:center;
                                  background-size: cover;
@@ -131,7 +131,7 @@ class Magic_Square(QMainWindow):
         shadow.setOffset(2, 2)
         self.esc_btn.setGraphicsEffect(shadow)
         self.esc_btn.setMaximumSize(QtCore.QSize(80, 40))
-        self.esc_btn.setIcon(QIcon('arrow.ico'))
+        self.esc_btn.setIcon(QIcon('images/arrow.ico'))
         self.esc_btn.setIconSize(QSize(50, 30))
         self.esc_btn.setCursor(Qt.PointingHandCursor)
         self.gridLayout_5.addWidget(self.esc_btn, 0, 1, 1, 1)
@@ -141,7 +141,7 @@ class Magic_Square(QMainWindow):
         shadow.setColor(QColor(0, 0, 0, 127))
         shadow.setOffset(2, 2)
         self.menu_btn_sqr.setGraphicsEffect(shadow)
-        self.menu_btn_sqr.setIcon(QIcon('menu.ico'))
+        self.menu_btn_sqr.setIcon(QIcon('images/menu.ico'))
         self.menu_btn_sqr.setIconSize(QSize(50, 30))
         self.menu_btn_sqr.setCursor(Qt.PointingHandCursor)
         self.gridLayout_5.addWidget(self.menu_btn_sqr, 0, 0, 1, 1)
@@ -163,7 +163,7 @@ class Magic_Square(QMainWindow):
             self.upd_btn = QPushButton(self.frame_3)
             self.upd_btn.setGraphicsEffect(shadow)
             self.upd_btn.resize(QtCore.QSize(80, 60))
-            self.upd_btn.setIcon(QIcon('upd.ico'))
+            self.upd_btn.setIcon(QIcon('images/upd.ico'))
             self.upd_btn.setIconSize(QSize(50, 30))
             self.upd_btn.setCursor(Qt.PointingHandCursor)
             self.gridLayout.addWidget(self.upd_btn, 0, 1, 1, 1)
@@ -223,7 +223,7 @@ class Magic_Square(QMainWindow):
         error_msg.setWindowTitle('Ошибка')
         error_msg.setStyleSheet('font: 14pt Century Gothic')
         error_msg.setIcon(QMessageBox.Warning)
-        error_msg.setWindowIcon(QIcon('err.png'))
+        error_msg.setWindowIcon(QIcon('images/err.png'))
         error_msg.setText('Нужно заполнить все ячейки!')
         error_msg.exec_()
 
@@ -232,7 +232,7 @@ class Magic_Square(QMainWindow):
         error_msg.setWindowTitle('Ошибка')
         error_msg.setStyleSheet('font: 14pt Century Gothic')
         error_msg.setIcon(QMessageBox.Warning)
-        error_msg.setWindowIcon(QIcon('err.png'))
+        error_msg.setWindowIcon(QIcon('images/err.png'))
         error_msg.setText('Числа во всех ячейках должны отличаться!')
         error_msg.exec_()
 
@@ -307,7 +307,7 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     MainWindow = QMainWindow()
     MainWindow.resize(1920, 1080)
-    MainWindow.setWindowIcon(QIcon('icon.png'))
+    MainWindow.setWindowIcon(QIcon('images/icon.png'))
     ui = Magic_Square()
     MainWindow.showMaximized()
     sys.exit(app.exec_())

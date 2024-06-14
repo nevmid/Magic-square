@@ -54,7 +54,7 @@ def Mode(self, MainWindow):
     shadow.setBlurRadius(2)
     shadow.setColor(QColor(0, 0, 0, 127))
     shadow.setOffset(2, 2)
-    menu_btn.setIcon(QIcon('menu.ico'))
+    menu_btn.setIcon(QIcon('images/menu.ico'))
     menu_btn.setGraphicsEffect(shadow)
     shadow = QGraphicsDropShadowEffect()
     shadow.setBlurRadius(2)
@@ -88,7 +88,7 @@ def Mode(self, MainWindow):
                                  border: none;
                                  }
                                  QMainWindow { 
-                                 background-image: url(newf.png);
+                                 background-image: url(images/newf.png);
                                  background-repeat: no-repeat;
                                  background-position:center;
                                  background-size: cover;
